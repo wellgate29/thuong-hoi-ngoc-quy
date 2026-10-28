@@ -1,6 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+<script>
+(function(){
+  var q = new URLSearchParams(location.search);
+  function go(){ location.replace(location.pathname + '?' + q.toString()); }
+  // máy này từng bị "mất WebGL": mở thẳng chế độ nhẹ
+  try { if (localStorage.getItem('thnq_gfx') === 'safe' && !q.has('safe') && !q.has('gem')) { q.set('safe', '1'); go(); return; } } catch (e) {}
+  // card đồ hoạ không kham nổi: không báo lỗi, tự mở lại ở chế độ nhẹ
+  window.addEventListener('webglcontextlost', function(e){
+    e.stopImmediatePropagation();
+    if (q.get('safe') !== '1') {
+      try { localStorage.setItem('thnq_gfx', 'safe'); } catch (_) {}
+      q.set('safe', '1'); go();
+    } else {
+      document.body.innerHTML = '<p style="color:#fff;font:20px sans-serif;padding:40px">Máy này không chạy được đồ hoạ 3D của game. Hãy thử trình duyệt Chrome hoặc máy khác.</p>';
+    }
+  }, true);
+  // gỡ bộ nhớ đệm của bản cũ (bản cũ dùng service worker giữ file lại)
+  if ('serviceWorker' in navigator) navigator.serviceWorker.getRegistrations().then(function(rs){ rs.forEach(function(r){ r.unregister(); }); });
+  if (window.caches) caches.keys().then(function(ks){ ks.forEach(function(k){ caches.delete(k); }); });
+})();
+</script>
+
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
 		<title>Thuong Hoi Ngoc Quy</title>
@@ -90,9 +112,8 @@ body {
 	z-index: 1;
 }
 		</style>
-		<link id="-gd-engine-icon" rel="icon" type="image/png" href="index.icon.png" />
-<link rel="apple-touch-icon" href="index.apple-touch-icon.png"/>
-<link rel="manifest" href="index.manifest.json">
+		<link id="-gd-engine-icon" rel="icon" type="image/png" href="g2610280411.icon.png" />
+<link rel="apple-touch-icon" href="g2610280411.apple-touch-icon.png"/>
 
 	</head>
 	<body>
@@ -105,14 +126,14 @@ body {
 		</noscript>
 
 		<div id="status">
-			<img id="status-splash" class="show-image--true fullsize--true use-filter--true" src="index.png" alt="">
+			<img id="status-splash" class="show-image--true fullsize--true use-filter--true" src="g2610280411.png" alt="">
 			<progress id="status-progress"></progress>
 			<div id="status-notice"></div>
 		</div>
 
-		<script src="index.js"></script>
+		<script src="g2610280411.js"></script>
 		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":false,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":32184984,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4,"serviceWorker":"index.service.worker.js"};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":false,"executable":"g2610280411","experimentalVK":false,"fileSizes":{"g2610280411.pck":32755076,"g2610280411.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
 const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
 
