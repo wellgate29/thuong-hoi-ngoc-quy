@@ -22,6 +22,30 @@
   if (window.caches) caches.keys().then(function(ks){ ks.forEach(function(k){ caches.delete(k); }); });
 })();
 </script>
+<script>
+(function(){
+  var ua = navigator.userAgent || '';
+  var inapp = /Zalo|FBAN|FBAV|FB_IAB|Messenger|Instagram|Line\/|MicroMessenger|TikTok|Snapchat/i.test(ua);
+  function box(html, top){
+    var d = document.createElement('div');
+    d.style.cssText = 'position:fixed;left:12px;right:12px;' + (top ? 'top:12px' : 'bottom:12px') + ';z-index:99999;background:rgba(20,16,12,.94);color:#ffe3b0;font:16px/1.45 -apple-system,Segoe UI,Arial,sans-serif;padding:14px 16px;border-radius:12px;border:1px solid #a07840;text-align:center';
+    d.innerHTML = html;
+    document.body.appendChild(d);
+    return d;
+  }
+  window.addEventListener('DOMContentLoaded', function(){
+    // mở trong ứng dụng chat (Zalo, Messenger…): trình duyệt thu nhỏ hay thiếu bộ nhớ cho game 3D
+    if (inapp) box('Bạn đang mở game bên trong ứng dụng chat. Nếu game không chạy, bấm <b>⋯</b> rồi chọn <b>Mở bằng trình duyệt</b> (Safari / Chrome).', true);
+    // tải quá lâu mà game chưa mở: báo cách xử lý thay vì để người chơi chờ mãi
+    setTimeout(function(){
+      var st = document.getElementById('status');
+      if (st && st.style.visibility !== 'hidden' && document.body.contains(st)) {
+        box('Game mở lâu hơn bình thường. Hãy chờ thêm chút, hoặc <b>tải lại trang</b>.' + (inapp ? ' Tốt nhất mở bằng <b>Safari / Chrome</b>.' : '') + '<br><small>Cần trình duyệt mới (Chrome, Edge, Safari 16 trở lên).</small>', false);
+      }
+    }, 75000);
+  });
+})();
+</script>
 
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
@@ -112,8 +136,8 @@ body {
 	z-index: 1;
 }
 		</style>
-		<link id="-gd-engine-icon" rel="icon" type="image/png" href="g2610280614.icon.png" />
-<link rel="apple-touch-icon" href="g2610280614.apple-touch-icon.png"/>
+		<link id="-gd-engine-icon" rel="icon" type="image/png" href="g2610290907.icon.png" />
+<link rel="apple-touch-icon" href="g2610290907.apple-touch-icon.png"/>
 
 	</head>
 	<body>
@@ -126,14 +150,14 @@ body {
 		</noscript>
 
 		<div id="status">
-			<img id="status-splash" class="show-image--true fullsize--true use-filter--true" src="g2610280614.png" alt="">
+			<img id="status-splash" class="show-image--true fullsize--true use-filter--true" src="g2610290907.png" alt="">
 			<progress id="status-progress"></progress>
 			<div id="status-notice"></div>
 		</div>
 
-		<script src="g2610280614.js"></script>
+		<script src="g2610290907.js"></script>
 		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":false,"executable":"g2610280614","experimentalVK":false,"fileSizes":{"g2610280614.pck":32755956,"g2610280614.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":false,"executable":"g2610290907","experimentalVK":false,"fileSizes":{"g2610290907.pck":32759888,"g2610290907.wasm":37902138},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
 const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
 
