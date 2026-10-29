@@ -6,19 +6,19 @@
   var q = new URLSearchParams(location.search);
   function go(){ location.replace(location.pathname + '?' + q.toString()); }
   // trình duyệt còn giữ trang của bản cũ: hỏi bản mới nhất rồi tự mở lại đúng bản (không cần người chơi tải lại)
-  var PAGE_V = 'g2610290938';
+  var PAGE_V = 'g2610290959';
   try {
     fetch('version.json?t=' + Date.now(), {cache: 'no-store'}).then(function(r){ return r.json(); }).then(function(j){
       if (j && j.v && j.v !== PAGE_V && q.get('v') !== j.v) { q.set('v', j.v); go(); }
     }).catch(function(){});
   } catch (e) {}
-  // máy này từng bị "mất WebGL": mở thẳng chế độ nhẹ
-  try { if (localStorage.getItem('thnq_gfx') === 'safe' && !q.has('safe') && !q.has('gem')) { q.set('safe', '1'); go(); return; } } catch (e) {}
+  // máy này từng bị "mất WebGL" với đúng bản này: mở thẳng chế độ nhẹ (bản mới thì thử lại chế độ đẹp)
+  try { if (localStorage.getItem('thnq_gfx') === PAGE_V && !q.has('safe') && !q.has('gem')) { q.set('safe', '1'); go(); return; } } catch (e) {}
   // card đồ hoạ không kham nổi: không báo lỗi, tự mở lại ở chế độ nhẹ
   window.addEventListener('webglcontextlost', function(e){
     e.stopImmediatePropagation();
     if (q.get('safe') !== '1') {
-      try { localStorage.setItem('thnq_gfx', 'safe'); } catch (_) {}
+      try { localStorage.setItem('thnq_gfx', PAGE_V); } catch (_) {}
       q.set('safe', '1'); go();
     } else {
       document.body.innerHTML = '<p style="color:#fff;font:20px sans-serif;padding:40px">Máy này không chạy được đồ hoạ 3D của game. Hãy thử trình duyệt Chrome hoặc máy khác.</p>';
@@ -143,8 +143,8 @@ body {
 	z-index: 1;
 }
 		</style>
-		<link id="-gd-engine-icon" rel="icon" type="image/png" href="g2610290938.icon.png" />
-<link rel="apple-touch-icon" href="g2610290938.apple-touch-icon.png"/>
+		<link id="-gd-engine-icon" rel="icon" type="image/png" href="g2610290959.icon.png" />
+<link rel="apple-touch-icon" href="g2610290959.apple-touch-icon.png"/>
 
 	</head>
 	<body>
@@ -157,14 +157,14 @@ body {
 		</noscript>
 
 		<div id="status">
-			<img id="status-splash" class="show-image--true fullsize--true use-filter--true" src="g2610290938.png" alt="">
+			<img id="status-splash" class="show-image--true fullsize--true use-filter--true" src="g2610290959.png" alt="">
 			<progress id="status-progress"></progress>
 			<div id="status-notice"></div>
 		</div>
 
-		<script src="g2610290938.js"></script>
+		<script src="g2610290959.js"></script>
 		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":false,"executable":"g2610290938","experimentalVK":false,"fileSizes":{"g2610290938.pck":32759888,"g2610290938.wasm":37902138},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":false,"executable":"g2610290959","experimentalVK":false,"fileSizes":{"g2610290959.pck":32760400,"g2610290959.wasm":37902138},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
 const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
 
